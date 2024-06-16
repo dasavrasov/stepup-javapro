@@ -25,4 +25,8 @@ public class Reflection1 {
     public static void static2() {
         System.out.println("Run static2");
     }
+    @CsvSource(value="10,Java,20,true")
+    public void testMethod(int a, String b, int c, boolean d){
+        System.out.println("Run testMethod with parameters: " + a + " " + b + " " + c + " " + d);
+    }
 }

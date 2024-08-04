@@ -1,19 +1,30 @@
 package ru.stepup.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
 @Configuration
 public class DatabaseConfig {
-    @Value("${spring.datasource.url}")
-    private String dbUrl;
 
-    @Value("${spring.datasource.username}")
-    private String dbUsername;
+    @Bean
+    public DataSource dataSource() {
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName("org.postgresql.Driver");
+        config.setJdbcUrl("jdbc:postgresql://localhost:5431/postgres");
+        config.setUsername("postgres");
+        config.setPassword("12345");
+        return new HikariDataSource(config);
+    }
 
-    @Value("${spring.datasource.password}")
-    private String dbPassword;
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
 }

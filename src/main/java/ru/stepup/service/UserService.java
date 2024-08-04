@@ -18,8 +18,8 @@ public class UserService {
         return userDao.save(user);
     }
 
-    public User findById(Long id) {
-        return userDao.findById(id).orElse(null);
+    public User findByName(String username) {
+        return userDao.findByName(username);
     }
 
     public void deleteById(Long id) {

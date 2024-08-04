@@ -1,12 +1,14 @@
 package ru.stepup;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class Main {
     public static void main(String[] args) {
         // Создаем пул потоков
-        ThreadPool threadPool = new ThreadPool(5);
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 5, 0, null, null);
+//        ThreadPool threadPool = new ThreadPool(5);
+        ExecutorService threadPool = Executors.newFixedThreadPool(5);
 
         // Создаем 10 задач и отправляем их на выполнение
         for (int i = 0; i < 10; i++) {
@@ -25,7 +27,7 @@ public class Main {
 
         // Ждем завершения всех задач
         try {
-            threadPool.awaitTermination();
+            threadPool.awaitTermination(Long.MAX_VALUE, java.util.concurrent.TimeUnit.NANOSECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

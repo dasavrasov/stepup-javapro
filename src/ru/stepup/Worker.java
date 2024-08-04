@@ -8,15 +8,11 @@ class Worker extends Thread {
     }
 
     public void run() {
-        try {
-            while (!pool.isShutdown()) {
-                Runnable task = pool.getTask();
-                if (task != null) {
-                    task.run();
-                }
+        while (!pool.isShutdown()) {
+            Runnable task = pool.getTask();
+            if (task != null) {
+                task.run();
             }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
         }
     }
 }

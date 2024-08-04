@@ -1,18 +1,25 @@
 package ru.stepup.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Entity(name = "users")
+@Entity
+@Table(name = "users")
 @Getter
 @Setter
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "username")
     private String username;
+
+    public User() {
+    }
+
+    public User(String username) {
+        this.username = username;
+    }
 }

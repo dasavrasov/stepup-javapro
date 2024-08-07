@@ -26,9 +26,9 @@ public class UserDao {
         return user;
     }
 
-    public User findByName(String username) {
-        String sql = "SELECT * FROM users WHERE username = ? limit 1";
-        return jdbcTemplate.queryForObject(sql, new Object[]{username}, new UserRowMapper());
+    public User findById(Long id) {
+        String sql = "SELECT * FROM users WHERE id=?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new UserRowMapper());
     }
 
     public void deleteById(Long id) {
